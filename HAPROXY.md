@@ -1,6 +1,7 @@
 # HAProxy
 
 This page contains the instruction to build HAProxy Web server for use with Strudel Web
+HAproxy is just an example of how to load-balance the Strudel Web services, it is a front-end to the 
 
 ## Pre-requisite
 - A server running Ubuntu 18.04
@@ -21,9 +22,9 @@ This page contains the instruction to build HAProxy Web server for use with Stru
 (Your Intermediate certificate) 
 -----END CERTIFICATE----- 
 ```
-Put this file in `/etc/ssl/private` directory.
+Put this file in `/etc/ssl/private` directory.   
 2. Create `/etc/haproxy/crtlist.txt` with the path to the PEM file, for example:
-`/etc/ssl/private/certificate.pem`
+`/etc/ssl/private/certificate.pem`.   
 3. Configure `/etc/haproxy/haproxy.cfg` with the frontends and backends pointing to the Strudel Web instance, for example::
 ```
 frontend strudel_web_frontend_http
