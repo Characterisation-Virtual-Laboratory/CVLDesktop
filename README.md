@@ -11,7 +11,7 @@ Strudel Web for [CVL](https://desktop.cvl.org.au) infrastructure consists of the
 Current [CVL](https://desktop.cvl.org.au) consists of:
 * 2 HAProxy servers   
 * 2 Strudel Web Server   
-* 1 ssh-authz   
+* 1 pysshauthz   
 * 1 LDAP server   
 
 The HAProxy servers are the front-end to the Strudel Web service, effectively load-balancing between the two Strudel Web servers.
