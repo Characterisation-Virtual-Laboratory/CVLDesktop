@@ -1,0 +1,34 @@
+---
+- include_vars: "{{ ansible_distribution }}_{{ ansible_architecture }}.yml"
+
+- include_vars: "CentOS_7_x86_64.yml"
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+- name: install system packages apt
+  apt: name={{ system_packages }} state=present update_cache=true
+  become: true
+  when: ansible_os_family == 'Debian'
+
+- name: force the use of mate desktop
+  template:
+    src: vncserver.ubuntu
+    dest: /usr/bin/vncserver
+    owner: root
+    group: root
+    mode: u=rxw,g=rx,o=rx
+  become: true
+  when: ansible_os_family == 'Debian'
+
+- name: query the default x-session
+  shell: update-alternatives --query x-session-manager | grep Value
+  become: true
+  check_mode: no
+  changed_when: false
+  register: qxsessionmanager
+  when: ansible_os_family == 'Debian'
+
+- name: make mate the default x-session
+  shell: update-alternatives --set x-session-manager /usr/bin/mate-session
+  become: true
+  when: ansible_os_family == 'Debian' and "mate" not in qxsessionmanager.stdout 
+
