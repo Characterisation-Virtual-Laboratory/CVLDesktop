@@ -1,11 +1,14 @@
 ---
 - hosts: 'CVLDesktop'
   roles:
-    #- { role: gpu, tags: [ drivers, kernelupgrade, gpu,nvidia ] } # currently in https://gitlab.erc.monash.edu.au/hpc-team/HPCasCode will be enabled after sucessfull testing
-    #- { role: systemd-nvidia-uvm, tags: [ uvm,kernelupgrade,nvidia ] } # currently in https://gitlab.erc.monash.edu.au/hpc-team/HPCasCode will be enabled after sucessfull testing
-    #- { role: deploy-xorg, tags: [ deploy-xorg,kernelupgrade,nvidia ] } # currently in https://gitlab.erc.monash.edu.au/hpc-team/HPCasCode will be enabled after sucessfull testing
+    - { role: gpu, nvidia_version: "470.57.02", tags: [ drivers, kernelupgrade, gpu,nvidia ] } # currently in https://gitlab.erc.monash.edu.au/hpc-team/HPCasCode will be enabled after sucessfull testing
+    - { role: systemd-nvidia-uvm, tags: [ uvm,kernelupgrade,nvidia ] } # currently in https://gitlab.erc.monash.edu.au/hpc-team/HPCasCode will be enabled after sucessfull testing
+    - { role: deploy-xorg, tags: [ deploy-xorg,kernelupgrade,nvidia ] } # currently in https://gitlab.erc.monash.edu.au/hpc-team/HPCasCode will be enabled after sucessfull testing
     - { role: vncserver, tags: [ other, extra_packages ] } # includes mate desktop. maybe this should be renamed.
     - { role: singularity, singularity_version: "3.8.3",  become: yes, golang_version: "1.14.4", tags: [ other, singularity ] }
+- hosts: 'CVLDesktop'
+  tasks:
+    - { name: Install virtualGl, apt: { deb: https://swift.rc.nectar.org.au/v1/AUTH_810/CVL-Singularity-External-Files/virtualgl_2.6.2_amd64.deb} ,become: true, tags: [vgl] }
     # TODO mount CVL-Software singularity containers
     # TODO setup desktop icons
     # TODO a simple test would be nice maybe tensorflow printing the first cudagpu

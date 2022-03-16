@@ -12,11 +12,10 @@ vncserver  entering passwords manually # see generated contents  below
 ubuntu@cvltest:~$ cat /home/ubuntu/.vnc/passwd                                                                        
 <rzXubuntu@cvltest:~$ 
 
-scp handreas@m3-login.massive.org.au:/usr/local/virtualgl/2.5.0/bin/* ./virtualgl/
-# todo build vgl from source and not copy from m3
-
 xtigervncviewer -SecurityTypes VncAuth -passwd /home/ubuntu/.vnc/passwd :1
 
 test on the desktop for vglrun is :   ~$ ./vglrun ./glxspheres64
 
+test singularity via
+singularity exec library://sylabsed/examples/lolcow cowsay "Fresh from the library!"
 
