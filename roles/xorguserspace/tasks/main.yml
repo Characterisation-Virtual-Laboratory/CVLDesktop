@@ -1,0 +1,17 @@
+---
+- name: change allowed_user variable in Xwrapper.config
+  replace:
+    path: /etc/X11/Xwrapper.config
+    regexp:  'allowed_users=console'
+    replace: 'allowed_users=anybody'
+  become: true
+  register: xwrapperalloweduser
+  when: ansible_os_family=="Debian"
+
+- name: "Run `dpkg-reconfigure xserver-xorg-legacy` to make sure /etc/X11/Xwrapper.config doesn't get overridden during update"
+  expect:
+    command: 'dpkg-reconfigure -freadline xserver-xorg-legacy'
+    responses:
+      '(.*)Users allowed to start the X server(.*)': 3
+  when: xwrapperalloweduser.changed
+  become: true
