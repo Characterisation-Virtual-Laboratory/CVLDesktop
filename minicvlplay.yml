@@ -3,7 +3,7 @@
   roles:
     - { role: gpu, nvidia_version: "470.57.02", tags: [ drivers, kernelupgrade, gpu,nvidia ] } # currently in https://gitlab.erc.monash.edu.au/hpc-team/HPCasCode will be enabled after sucessfull testing
     - { role: systemd-nvidia-uvm, tags: [ uvm,kernelupgrade,nvidia ] } # currently in https://gitlab.erc.monash.edu.au/hpc-team/HPCasCode will be enabled after sucessfull testing
-    #- { role: deploy-xorg, tags: [ deploy-xorg,kernelupgrade,nvidia ] } # currently in https://gitlab.erc.monash.edu.au/hpc-team/HPCasCode will be enabled after sucessfull testing
+    - { role: deploy-xorg, tags: [ deploy-xorg,kernelupgrade,nvidia ] } # currently in https://gitlab.erc.monash.edu.au/hpc-team/HPCasCode will be enabled after sucessfull testing
     - { role: vncserver, tags: [ other, extra_packages ] } # includes mate desktop. maybe this should be renamed.
     - { role: singularity, singularity_version: "3.9.9",  become: yes, golang_version: "1.18.1", golang_redis_sha256sum: "b3b815f47ababac13810fc6021eb73d65478e0b2db4b09d348eefad9581a2334", tags: [ other, singularity ] }
 - hosts: 'localhost'
